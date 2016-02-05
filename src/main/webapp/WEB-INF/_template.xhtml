@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
+<head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width" />
 	<title>
 		<ui:insert name="titulo">Folha de Pagamento</ui:insert>
 	</title>
 	
-	<h:outputStylesheet name="bootstrap.min.css" library="bootstrap/css" />
-</h:head>
+	<link rel="stylesheet" href="#{request.contextPath}/resources/bootstrap/css/bootstrap.min.css" />
+</head>
 
-<h:body>
+<body>
 	<div class="container">
 		<ui:include src="/WEB-INF/_menu.xhtml" />
 		<ui:insert name="principal" />
 	</div>
 	
-	<h:outputScript name="jquery.min.js" library="bootstrap/js" />
-	<h:outputScript name="bootstrap.min.js" library="bootstrap/js" />
-</h:body>
+	<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/jquery.min.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
+</body>
 </html>
