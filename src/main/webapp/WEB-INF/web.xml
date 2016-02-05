@@ -6,7 +6,7 @@
 	<display-name>folhadepagamento</display-name>
 
 	<welcome-file-list>
-		<welcome-file>index.xhtml</welcome-file>
+		<welcome-file>pages/index.xhtml</welcome-file>
 	</welcome-file-list>
 	
 	<servlet>
