@@ -10,15 +10,15 @@ public class FaixaSalarialVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private BigDecimal valorInicial;
-	private BigDecimal valorFinal;
+	private BigDecimal valorMinimo;
+	private BigDecimal valorMaximo;
 	
 	public FaixaSalarialVO() {
 	}
 
-	public FaixaSalarialVO(BigDecimal valorInicial, BigDecimal valorFinal) {
-		this.valorInicial = valorInicial;
-		this.valorFinal = valorFinal;
+	public FaixaSalarialVO(BigDecimal valorMinimo, BigDecimal valorMaximo) {
+		this.valorMinimo = valorMinimo;
+		this.valorMaximo = valorMaximo;
 	}
 	
 	@Override
@@ -26,9 +26,9 @@ public class FaixaSalarialVO implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((valorFinal == null) ? 0 : valorFinal.hashCode());
+				+ ((valorMaximo == null) ? 0 : valorMaximo.hashCode());
 		result = prime * result
-				+ ((valorInicial == null) ? 0 : valorInicial.hashCode());
+				+ ((valorMinimo == null) ? 0 : valorMinimo.hashCode());
 		return result;
 	}
 
@@ -41,30 +41,30 @@ public class FaixaSalarialVO implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		FaixaSalarialVO other = (FaixaSalarialVO) obj;
-		if (valorFinal == null) {
-			if (other.valorFinal != null)
+		if (valorMaximo == null) {
+			if (other.valorMaximo != null)
 				return false;
-		} else if (!valorFinal.equals(other.valorFinal))
+		} else if (!valorMaximo.equals(other.valorMaximo))
 			return false;
-		if (valorInicial == null) {
-			if (other.valorInicial != null)
+		if (valorMinimo == null) {
+			if (other.valorMinimo != null)
 				return false;
-		} else if (!valorInicial.equals(other.valorInicial))
+		} else if (!valorMinimo.equals(other.valorMinimo))
 			return false;
 		return true;
 	}
 
-	public BigDecimal getValorInicial() {
-		return valorInicial;
+	public BigDecimal getValorMinimo() {
+		return valorMinimo;
 	}
-	public void setValorInicial(BigDecimal valorInicial) {
-		this.valorInicial = valorInicial;
+	public void setValorMinimo(BigDecimal valorMinimo) {
+		this.valorMinimo = valorMinimo;
 	}
-	public BigDecimal getValorFinal() {
-		return valorFinal;
+	public BigDecimal getValorMaximo() {
+		return valorMaximo;
 	}
-	public void setValorFinal(BigDecimal valorFinal) {
-		this.valorFinal = valorFinal;
+	public void setValorMaximo(BigDecimal valorMaximo) {
+		this.valorMaximo = valorMaximo;
 	}
 
 }

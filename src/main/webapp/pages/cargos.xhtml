@@ -29,16 +29,16 @@
 							<legend>Faixa Salarial</legend>
 							
 							<div class="form-group">
-								<label for="faixaInicial" class="col-sm-2 control-label">Valor Inicial:</label>
+								<label for="valorMinimo" class="col-sm-2 control-label">Valor Minimo:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="faixaInicial" required="required" jsf:value="#{cargoMB.cargo.faixaSalarial.valorInicial}" />
+									<input type="text" class="form-control" id="valorMinimo" required="required" jsf:value="#{cargoMB.cargo.faixaSalarial.valorMinimo}" />
 								</div>
 							</div>
 							
 							<div class="form-group">
-								<label for="faixaFinal" class="col-sm-2 control-label">Valor Final:</label>
+								<label for="valorMaximo" class="col-sm-2 control-label">Valor Maximo:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="faixaFinal" required="required" jsf:value="#{cargoMB.cargo.faixaSalarial.valorFinal}" />
+									<input type="text" class="form-control" id="valorMaximo" required="required" jsf:value="#{cargoMB.cargo.faixaSalarial.valorMaximo}" />
 								</div>
 							</div>
 						</fieldset>
@@ -66,13 +66,13 @@
 								</h:column>
 								
 								<h:column>
-									<f:facet name="header">SALARIO INICIAL</f:facet>
-									#{cargo.faixaSalarial.valorInicial}
+									<f:facet name="header">SALARIO MINIMO</f:facet>
+									#{cargo.faixaSalarial.valorMinimo}
 								</h:column>
 								
 								<h:column>
-									<f:facet name="header">SALARIO FINAL</f:facet>
-									#{cargo.faixaSalarial.valorFinal}
+									<f:facet name="header">SALARIO MAXIMO</f:facet>
+									#{cargo.faixaSalarial.valorMaximo}
 								</h:column>
 								
 								<h:column>

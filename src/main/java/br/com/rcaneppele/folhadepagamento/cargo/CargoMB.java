@@ -24,10 +24,10 @@ public class CargoMB {
 	public void cadastra() {
 		if (cargo.isSalvo()) {
 			repository.atualiza(cargo);
-			msg.adicionaMensagemSucesso("Cargo cadastrado com sucesso!");
+			msg.adicionaMensagemSucesso("Cargo atualizado com sucesso!");
 		} else {
 			repository.cadastra(cargo);
-			msg.adicionaMensagemSucesso("Cargo atualizado com sucesso!");
+			msg.adicionaMensagemSucesso("Cargo cadastrado com sucesso!");
 		}
 		
 		limpaFormulario();
