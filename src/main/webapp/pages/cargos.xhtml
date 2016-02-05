@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="/WEB-INF/_template.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+	
+	<ui:define name="titulo">Cadastro de Cargos</ui:define>
+	
+	<ui:define name="principal">
+		<f:view transient="true">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title text-center">CADASTRO DE CARGO</h3>
+				</div>
+				
+				<div class="panel-body">
+					<form jsf:id="form-cadastro" jsf:prependId="false" class="form-horizontal" method="post">
+						<input type="hidden" jsf:value="#{cargoMB.cargo.id}" />
+					
+						<div class="form-group">
+							<label for="nome" class="col-sm-2 control-label">Nome:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="nome" required="required" jsf:value="#{cargoMB.cargo.nome}" />
+							</div>
+						</div>
+						
+						<fieldset>
+							<legend>Faixa Salarial</legend>
+							
+							<div class="form-group">
+								<label for="faixaInicial" class="col-sm-2 control-label">Valor Inicial:</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="faixaInicial" required="required" jsf:value="#{cargoMB.cargo.faixaSalarial.valorInicial}" />
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="faixaFinal" class="col-sm-2 control-label">Valor Final:</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="faixaFinal" required="required" jsf:value="#{cargoMB.cargo.faixaSalarial.valorFinal}" />
+								</div>
+							</div>
+						</fieldset>
+						
+						<button type="submit" class="btn btn-primary" jsf:action="#{cargoMB.cadastra}">
+							<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Gravar
+						</button>
+					</form>
+				</div>
+			</div>
+			
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title text-center">CARGOS CADASTRADOS</h3>
+				</div>
+				
+				<div class="panel-body">
+					<div class="table-responsive">
+						<form jsf:id="form-listagem" jsf:prependId="false">
+							<h:dataTable styleClass="table table-hover table-striped table-bordered" value="#{cargoMB.todos}" var="cargo">
+								<h:column>
+									<f:facet name="header">NOME</f:facet>
+									#{cargo.nome}
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">SALARIO INICIAL</f:facet>
+									#{cargo.faixaSalarial.valorInicial}
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">SALARIO FINAL</f:facet>
+									#{cargo.faixaSalarial.valorFinal}
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">ACOES</f:facet>
+									<button style="margin-right: 5%;" class="btn btn-warning" jsf:action="#{cargoMB.setCargo(cargo)}">
+										<span class="glyphicon glyphicon-floppy-edit" aria-hidden="true"></span> Alterar
+									</button>
+									
+									<button class="btn btn-danger" jsf:action="#{cargoMB.remove(cargo)}">
+										<span class="glyphicon glyphicon-floppy-trash" aria-hidden="true"></span> Remover
+									</button>
+								</h:column>
+							</h:dataTable>
+						</form>
+					</div>
+				</div>
+			</div>
+		</f:view>
+	</ui:define>
+</ui:composition>
