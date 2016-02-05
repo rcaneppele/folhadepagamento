@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" 
+	xmlns:h="http://java.sun.com/jsf/html">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -9,17 +9,17 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">HOME</a>
+			<a class="navbar-brand" href="#{request.contextPath}/">HOME</a>
 		</div>
         
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li>
-					<a href="#">CARGOS</a>
+					<h:outputLink value="#{request.contextPath}/pages/cargos.xhtml">CARGOS</h:outputLink>
 				</li>
 				
 				<li>
-					<a href="#">FUNCIONARIOS</a>
+					<a href="#{request.contextPath}/pages/funcionarios.xhtml">FUNCIONARIOS</a>
 				</li>
 			</ul>
 		</div>
