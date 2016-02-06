@@ -4,13 +4,21 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 
 @Embeddable
+// R$880 => salario minimo 2016
 public class FaixaSalarialVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	@NotNull(message = "{valorMinimo.obrigatorio}")
+	@DecimalMin(value = "880", message = "{valor.salario.invalido}")
 	private BigDecimal valorMinimo;
+	
+	@NotNull(message = "{valorMaximo.obrigatorio}")
+	@DecimalMin(value = "880", message = "{valor.salario.invalido}")
 	private BigDecimal valorMaximo;
 	
 	public FaixaSalarialVO() {
