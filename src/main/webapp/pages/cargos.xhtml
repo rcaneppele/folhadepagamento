@@ -7,6 +7,22 @@
 	
 	<ui:define name="titulo">Cadastro de Cargos</ui:define>
 	
+	<ui:define name="extraScripts">
+		<script type="text/javascript" src="#{request.contextPath}/resources/jquery/plugins/jquery.price.min.js"></script>
+		<script type="text/javascript">
+			(function($) {
+				"use strict";
+				
+				$(".monetario").priceFormat({
+				    prefix: "R$ ",
+				    centsSeparator: ",",
+				    thousandsSeparator: ".",
+				    clearPrefix: true
+				});
+			})(jQuery);
+		</script>
+	</ui:define>
+	
 	<ui:define name="principal">
 		<f:view transient="true">
 			<div class="panel panel-default">
@@ -31,14 +47,14 @@
 							<div class="form-group">
 								<label for="valorMinimo" class="col-sm-2 control-label">Valor Minimo:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="valorMinimo" required="required" jsf:value="#{cargoMB.cargo.faixaSalarial.valorMinimo}" />
+									<input type="text" class="form-control monetario" id="valorMinimo" required="required" jsf:value="#{cargoMB.cargo.faixaSalarial.valorMinimo}" jsf:converter="CustomBigDecimalConverter" />
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="valorMaximo" class="col-sm-2 control-label">Valor Maximo:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="valorMaximo" required="required" jsf:value="#{cargoMB.cargo.faixaSalarial.valorMaximo}" />
+									<input type="text" class="form-control monetario" id="valorMaximo" required="required" jsf:value="#{cargoMB.cargo.faixaSalarial.valorMaximo}" jsf:converter="CustomBigDecimalConverter" />
 								</div>
 							</div>
 						</fieldset>
@@ -62,17 +78,17 @@
 							<h:dataTable styleClass="table table-hover table-striped table-bordered" value="#{cargoMB.todos}" var="cargo">
 								<h:column>
 									<f:facet name="header">NOME</f:facet>
-									#{cargo.nome}
+									<h:outputText value="#{cargo.nome}" />
 								</h:column>
 								
 								<h:column>
 									<f:facet name="header">SALARIO MINIMO</f:facet>
-									#{cargo.faixaSalarial.valorMinimo}
+									<h:outputText value="#{cargo.faixaSalarial.valorMinimo}" converter="CustomBigDecimalConverter" />
 								</h:column>
 								
 								<h:column>
 									<f:facet name="header">SALARIO MAXIMO</f:facet>
-									#{cargo.faixaSalarial.valorMaximo}
+									<h:outputText value="#{cargo.faixaSalarial.valorMaximo}" converter="CustomBigDecimalConverter" />
 								</h:column>
 								
 								<h:column>
