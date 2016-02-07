@@ -45,14 +45,14 @@
 							<legend>Faixa Salarial</legend>
 							
 							<div class="form-group">
-								<label for="valorMinimo" class="col-sm-2 control-label">Valor Minimo:</label>
+								<label for="valorMinimo" class="col-sm-2 control-label">Valor Mínimo:</label>
 								<div class="col-sm-4">
 									<input type="text" class="form-control monetario" id="valorMinimo" required="required" jsf:value="#{cargoMB.cargo.faixaSalarial.valorMinimo}" jsf:converter="CustomBigDecimalConverter" />
 								</div>
 							</div>
 							
 							<div class="form-group">
-								<label for="valorMaximo" class="col-sm-2 control-label">Valor Maximo:</label>
+								<label for="valorMaximo" class="col-sm-2 control-label">Valor Máximo:</label>
 								<div class="col-sm-4">
 									<input type="text" class="form-control monetario" id="valorMaximo" required="required" jsf:value="#{cargoMB.cargo.faixaSalarial.valorMaximo}" jsf:converter="CustomBigDecimalConverter" />
 								</div>
@@ -82,17 +82,17 @@
 								</h:column>
 								
 								<h:column>
-									<f:facet name="header">SALARIO MINIMO</f:facet>
+									<f:facet name="header">SALARIO MÍNIMO</f:facet>
 									<h:outputText value="#{cargo.faixaSalarial.valorMinimo}" converter="CustomBigDecimalConverter" />
 								</h:column>
 								
 								<h:column>
-									<f:facet name="header">SALARIO MAXIMO</f:facet>
+									<f:facet name="header">SALARIO MÁXIMO</f:facet>
 									<h:outputText value="#{cargo.faixaSalarial.valorMaximo}" converter="CustomBigDecimalConverter" />
 								</h:column>
 								
 								<h:column>
-									<f:facet name="header">ACOES</f:facet>
+									<f:facet name="header">AÇÕES</f:facet>
 									<button style="margin-right: 5%;" class="btn btn-warning" jsf:action="#{cargoMB.setCargo(cargo)}">
 										<span class="glyphicon glyphicon-floppy-edit" aria-hidden="true"></span> Alterar
 									</button>
