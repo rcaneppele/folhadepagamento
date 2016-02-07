@@ -3,11 +3,13 @@ package br.com.rcaneppele.folhadepagamento.cargo;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+@Named
 @RequestScoped
 public class CargoRepository {
 
