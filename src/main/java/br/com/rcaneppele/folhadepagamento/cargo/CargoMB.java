@@ -56,7 +56,7 @@ public class CargoMB {
 	}
 	
 	private void atualizaTabela() {
-		this.todos = repository.buscaTodos();
+		this.todos = repository.buscaTodosOrdenadosPeloNome();
 	}
 
 	public List<Cargo> getTodos() {

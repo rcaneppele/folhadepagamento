@@ -29,8 +29,8 @@ public class CargoRepository {
 		return em.find(Cargo.class, id);
 	}
 	
-	public List<Cargo> buscaTodos() {
-		String jpql = "SELECT c FROM " +Cargo.class.getName() + " c";
+	public List<Cargo> buscaTodosOrdenadosPeloNome() {
+		String jpql = "SELECT c FROM " +Cargo.class.getName() + " c ORDER BY c.nome";
 		return em.createQuery(jpql, Cargo.class).getResultList();
 	}
 	
