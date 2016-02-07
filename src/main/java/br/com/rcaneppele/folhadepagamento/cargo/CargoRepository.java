@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
@@ -20,6 +21,17 @@ public class CargoRepository {
 	public List<Cargo> buscaTodos() {
 		String jpql = "SELECT c FROM " +Cargo.class.getName() + " c";
 		return em.createQuery(jpql, Cargo.class).getResultList();
+	}
+	
+	public Cargo buscaPorNome(String nome) {
+		String jpql = "SELECT c FROM " +Cargo.class.getName() + " c WHERE c.nome = :nome";
+		try {
+			return em.createQuery(jpql, Cargo.class)
+					.setParameter("nome", nome)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 	
 	@Transactional

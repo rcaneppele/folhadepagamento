@@ -18,10 +18,18 @@ public class CargoMB {
 	@Inject
 	private MensagensJSF msg;
 	
+	@Inject
+	private ValidadorCargoExistente validadorCargoExistente;
+	
 	private Cargo cargo = new Cargo();
 	private List<Cargo> todos;
 	
 	public void cadastra() {
+		if (validadorCargoExistente.isCargoJaCadastrado(cargo)) {
+			msg.adicionaMensagemErro("Já existe outro Cargo cadastrado com o nome informado!");
+			return;
+		}
+		
 		if (cargo.isSalvo()) {
 			repository.atualiza(cargo);
 			msg.adicionaMensagemSucesso("Cargo atualizado com sucesso!");
