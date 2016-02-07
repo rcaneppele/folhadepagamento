@@ -3,18 +3,27 @@ package br.com.rcaneppele.folhadepagamento.cargo;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 @Named
 @RequestScoped
 public class CargoRepository {
 
-	@PersistenceContext
 	private EntityManager em;
+	
+	/**
+	 * CDI Eyes Only!
+	 */
+	protected CargoRepository() {
+	}
+
+	@Inject
+	public CargoRepository(EntityManager em) {
+		this.em = em;
+	}
 	
 	public Cargo buscaPorId(Long id) {
 		return em.find(Cargo.class, id);
@@ -36,19 +45,19 @@ public class CargoRepository {
 		}
 	}
 	
-	@Transactional
 	public void cadastra(Cargo novo) {
 		this.em.persist(novo);
 	}
 	
-	@Transactional
 	public void atualiza(Cargo existente) {
 		this.em.merge(existente);
 	}
 	
-	@Transactional
 	public void remove(Cargo removido) {
-		removido = em.getReference(Cargo.class, removido.getId());
+		//TODO: verificar porque nao esta chegando aqui com transacao ativa
+		em.joinTransaction();
+		
+		removido = buscaPorId(removido.getId());
 		this.em.remove(removido);
 	}
 	

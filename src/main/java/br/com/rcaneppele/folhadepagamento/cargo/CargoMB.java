@@ -5,6 +5,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.Transactional;
 
 import br.com.rcaneppele.folhadepagamento.util.jsf.MensagensJSF;
 
@@ -24,6 +25,7 @@ public class CargoMB {
 	private Cargo cargo = new Cargo();
 	private List<Cargo> todos;
 	
+	@Transactional
 	public void cadastra() {
 		if (validadorCargoExistente.isCargoJaCadastrado(cargo)) {
 			msg.adicionaMensagemErro("Já existe outro Cargo cadastrado com o nome informado!");
@@ -42,6 +44,7 @@ public class CargoMB {
 		atualizaTabela();
 	}
 	
+	@Transactional
 	public void remove(Cargo selecionado) {
 		repository.remove(selecionado);
 		msg.adicionaMensagemSucesso("Cargo removido com sucesso!");
