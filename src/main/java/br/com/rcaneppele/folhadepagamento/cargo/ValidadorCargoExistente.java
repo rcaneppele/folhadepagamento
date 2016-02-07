@@ -8,8 +8,12 @@ import javax.inject.Named;
 @Dependent
 public class ValidadorCargoExistente {
 	
+	private final CargoRepository repository;
+	
 	@Inject
-	private CargoRepository repository;
+	public ValidadorCargoExistente(CargoRepository repository) {
+		this.repository = repository;
+	}
 	
 	public boolean isCargoJaCadastrado(Cargo cargo) {
 		Cargo existente = repository.buscaPorNome(cargo.getNome());
@@ -19,5 +23,6 @@ public class ValidadorCargoExistente {
 		
 		return false;
 	}
+
 
 }
