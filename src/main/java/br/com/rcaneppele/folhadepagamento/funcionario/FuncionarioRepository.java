@@ -57,17 +57,17 @@ public class FuncionarioRepository {
 	}
 	
 	public void cadastra(Funcionario novo) {
+		this.em.joinTransaction();
 		this.em.persist(novo);
 	}
 	
 	public void atualiza(Funcionario existente) {
+		this.em.joinTransaction();
 		this.em.merge(existente);
 	}
 	
 	public void remove(Funcionario removido) {
-		//TODO: verificar porque nao esta chegando aqui com transacao ativa
-		em.joinTransaction();
-		
+		this.em.joinTransaction();
 		removido = buscaPorId(removido.getId());
 		this.em.remove(removido);
 	}
