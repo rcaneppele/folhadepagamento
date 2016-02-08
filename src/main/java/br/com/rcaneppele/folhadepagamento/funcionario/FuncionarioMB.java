@@ -40,10 +40,10 @@ public class FuncionarioMB {
 		
 		if (funcionario.isSalvo()) {
 			repository.atualiza(funcionario);
-			msg.adicionaMensagemSucesso("Funcionario atualizado com sucesso!");
+			msg.adicionaMensagemSucesso("Funcionário atualizado com sucesso!");
 		} else {
 			repository.cadastra(funcionario);
-			msg.adicionaMensagemSucesso("Funcionario cadastrado com sucesso!");
+			msg.adicionaMensagemSucesso("Funcionário cadastrado com sucesso!");
 		}
 		
 		limpaFormulario();
@@ -53,7 +53,7 @@ public class FuncionarioMB {
 	@Transactional
 	public void remove(Funcionario selecionado) {
 		repository.remove(selecionado);
-		msg.adicionaMensagemSucesso("Funcionario removido com sucesso!");
+		msg.adicionaMensagemSucesso("Funcionário removido com sucesso!");
 		atualizaTabela();
 	}
 	
