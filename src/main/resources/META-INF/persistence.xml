@@ -10,6 +10,7 @@
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<class>br.com.rcaneppele.folhadepagamento.cargo.Cargo</class>
+		<class>br.com.rcaneppele.folhadepagamento.funcionario.Funcionario</class>
 		
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />

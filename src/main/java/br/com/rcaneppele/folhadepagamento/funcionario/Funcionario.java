@@ -1,4 +1,4 @@
-package br.com.rcaneppele.folhadepagamento.cargo;
+package br.com.rcaneppele.folhadepagamento.funcionario;
 
 import java.io.Serializable;
 
@@ -8,11 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
-public class Cargo implements Serializable {
+public class Funcionario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -20,21 +18,14 @@ public class Cargo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull(message = "{nome.obrigatorio}") 
-	@Size(min = 1, message = "{nome.obrigatorio}")
-	private String nome;
+	@Embedded
+	@Valid
+	private DadosPessoais dadosPessoais = new DadosPessoais();
 	
 	@Embedded
 	@Valid
-	private FaixaSalarialVO faixaSalarial = new FaixaSalarialVO();
+	private DadosProfissionais dadosProfissionais = new DadosProfissionais();
 	
-	public Cargo() {
-	}
-	
-	public Cargo(Long id) {
-		this.id = id;
-	}
-
 	public boolean isSalvo() {
 		return this.id != null;
 	}
@@ -55,7 +46,7 @@ public class Cargo implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cargo other = (Cargo) obj;
+		Funcionario other = (Funcionario) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -70,14 +61,11 @@ public class Cargo implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNome() {
-		return nome;
+	public DadosPessoais getDadosPessoais() {
+		return dadosPessoais;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public FaixaSalarialVO getFaixaSalarial() {
-		return faixaSalarial;
+	public DadosProfissionais getDadosProfissionais() {
+		return dadosProfissionais;
 	}
 	
 }
