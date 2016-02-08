@@ -1,5 +1,7 @@
 package br.com.rcaneppele.folhadepagamento.funcionario;
 
+import java.util.List;
+
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,17 +18,12 @@ public class ValidadorFuncionarioExistente {
 	}
 	
 	public boolean isFuncionarioJaCadastrado(Funcionario funcionario) {
-		Funcionario existenteComMesmoCPF = repository.buscaPorCPF(funcionario.getDadosPessoais().getCpf());
-		if (existenteComMesmoCPF != null && !funcionario.equals(existenteComMesmoCPF)) {
-			return true;
+		List<Funcionario> encontrados = repository.buscaPorCPFOuMatricula(funcionario.getDadosPessoais().getCpf(), funcionario.getDadosProfissionais().getMatricula());
+		if (encontrados.isEmpty() || (encontrados.size() == 1 && encontrados.contains(funcionario))) {
+			return false;
 		}
 		
-		Funcionario existenteComMesmaMatricula = repository.buscaPorMatricula(funcionario.getDadosProfissionais().getMatricula());
-		if (existenteComMesmaMatricula != null && !funcionario.equals(existenteComMesmaMatricula)) {
-			return true;
-		}
-		
-		return false;
+		return true;
 	}
 
 

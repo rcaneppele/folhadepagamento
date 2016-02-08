@@ -6,7 +6,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 
 @Named
 @RequestScoped
@@ -34,26 +33,12 @@ public class FuncionarioRepository {
 		return em.createQuery(jpql, Funcionario.class).getResultList();
 	}
 	
-	public Funcionario buscaPorCPF(String cpf) {
-		String jpql = "SELECT f FROM " +Funcionario.class.getName() + " f WHERE f.dadosPessoais.cpf = :cpf";
-		try {
-			return em.createQuery(jpql, Funcionario.class)
-					.setParameter("cpf", cpf)
-					.getSingleResult();
-		} catch (NoResultException e) {
-			return null;
-		}
-	}
-	
-	public Funcionario buscaPorMatricula(String matricula) {
-		String jpql = "SELECT f FROM " +Funcionario.class.getName() + " f WHERE f.dadosProfissionais.matricula = :matricula";
-		try {
-			return em.createQuery(jpql, Funcionario.class)
-					.setParameter("matricula", matricula)
-					.getSingleResult();
-		} catch (NoResultException e) {
-			return null;
-		}
+	public List<Funcionario> buscaPorCPFOuMatricula(String cpf, String matricula) {
+		String jpql = "SELECT f FROM " +Funcionario.class.getName() + " f WHERE f.dadosPessoais.cpf = :cpf OR f.dadosProfissionais.matricula = :matricula";
+		return em.createQuery(jpql, Funcionario.class)
+				.setParameter("cpf", cpf)
+				.setParameter("matricula", matricula)
+				.getResultList();
 	}
 	
 	public void cadastra(Funcionario novo) {
@@ -71,5 +56,5 @@ public class FuncionarioRepository {
 		removido = buscaPorId(removido.getId());
 		this.em.remove(removido);
 	}
-	
+
 }
