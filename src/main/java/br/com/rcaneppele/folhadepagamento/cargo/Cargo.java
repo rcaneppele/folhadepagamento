@@ -20,7 +20,7 @@ public class Cargo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull(message = "nome.obrigatorio") 
+	@NotNull(message = "{nome.obrigatorio}") 
 	@Size(min = 1, message = "{nome.obrigatorio}")
 	private String nome;
 	
