@@ -73,7 +73,7 @@
 								<label for="cargo" class="col-sm-2 control-label">Cargo:</label>
 								<div class="col-sm-4">
 									<h:selectOneMenu id="cargo" styleClass="form-control" required="true" value="#{funcionarioMB.funcionario.dadosProfissionais.cargo}" converter="CargoConverter">
-										<f:selectItems value="#{funcionarioMB.cargos}" var="cargo" itemLabel="#{cargo.nome} (R$ #{cargo.faixaSalarial.valorMinimo} - R$ #{cargo.faixaSalarial.valorMaximo})" itemValue="#{cargo}" />
+										<f:selectItems value="#{funcionarioMB.cargos}" var="cargo" itemLabel="#{cargo.nome} (R$ #{cargo.valorSalarioMinimo} - R$ #{cargo.valorSalarioMaximo})" itemValue="#{cargo}" />
 									</h:selectOneMenu>
 								</div>
 							</div>
@@ -124,22 +124,22 @@
 								
 								<h:column>
 									<f:facet name="header">MATRÍCULA</f:facet>
-									<h:outputText value="#{funcionario.dadosProfissionais.matricula}" />
+									<h:outputText value="#{funcionario.matricula}" />
 								</h:column>
 								
 								<h:column>
 									<f:facet name="header">CARGO</f:facet>
-									<h:outputText value="#{funcionario.dadosProfissionais.cargo.nome}" />
+									<h:outputText value="#{funcionario.cargo.nome}" />
 								</h:column>
 								
 								<h:column>
 									<f:facet name="header">SALÁRIO</f:facet>
-									<h:outputText value="#{funcionario.dadosProfissionais.salario}" converter="CustomBigDecimalConverter" />
+									<h:outputText value="#{funcionario.salario}" converter="CustomBigDecimalConverter" />
 								</h:column>
 								
 								<h:column>
 									<f:facet name="header">DATA DE ADMISSÃO</f:facet>
-									<h:outputText value="#{funcionario.dadosProfissionais.dataAdmissao}" converter="LocalDateConverter" />
+									<h:outputText value="#{funcionario.dataAdmissao}" converter="LocalDateConverter" />
 								</h:column>
 								
 								<h:column>

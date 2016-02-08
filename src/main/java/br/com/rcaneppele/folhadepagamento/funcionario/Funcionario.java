@@ -2,6 +2,7 @@ package br.com.rcaneppele.folhadepagamento.funcionario;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -39,6 +40,14 @@ public class Funcionario implements Serializable {
 	
 	public BigDecimal getSalario() {
 		return this.dadosProfissionais.getSalario();
+	}
+	
+	public String getMatricula() {
+		return this.getDadosProfissionais().getMatricula();
+	}
+	
+	public LocalDate getDataAdmissao() {
+		return this.dadosProfissionais.getDataAdmissao();
 	}
 
 	@Override
