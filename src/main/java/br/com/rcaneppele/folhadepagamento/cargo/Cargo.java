@@ -1,6 +1,7 @@
 package br.com.rcaneppele.folhadepagamento.cargo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -37,6 +38,14 @@ public class Cargo implements Serializable {
 
 	public boolean isSalvo() {
 		return this.id != null;
+	}
+	
+	public BigDecimal getValorSalarioMinimo() {
+		return this.faixaSalarial.getValorMinimo();
+	}
+	
+	public BigDecimal getValorSalarioMaximo() {
+		return this.faixaSalarial.getValorMaximo();
 	}
 
 	@Override

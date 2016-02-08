@@ -27,12 +27,20 @@ public class FuncionarioMB {
 	@Inject
 	private ValidadorFuncionarioExistente validadorFuncionarioExistente;
 	
+	@Inject
+	private ValidadorSalarioFuncionario validadorSalarioFuncionario;
+	
 	private Funcionario funcionario = new Funcionario();
 	private List<Funcionario> todos;
 	private List<Cargo> cargos;
 	
 	@Transactional
 	public void cadastra() {
+		if (!validadorSalarioFuncionario.isSalarioCompativelComOCargo(funcionario)) {
+			msg.adicionaMensagemErro("Sálario digitado não está de acordo com a faixa salarial do cargo escolhido!");
+			return;
+		}
+		
 		if (validadorFuncionarioExistente.isFuncionarioJaCadastrado(funcionario)) {
 			msg.adicionaMensagemErro("Já existe outro Funcionário cadastrado com o CPF/Matrícula informada!");
 			return;

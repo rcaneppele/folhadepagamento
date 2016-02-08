@@ -1,6 +1,7 @@
 package br.com.rcaneppele.folhadepagamento.funcionario;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.Valid;
+
+import br.com.rcaneppele.folhadepagamento.cargo.Cargo;
 
 @Entity
 public class Funcionario implements Serializable {
@@ -28,6 +31,14 @@ public class Funcionario implements Serializable {
 	
 	public boolean isSalvo() {
 		return this.id != null;
+	}
+	
+	public Cargo getCargo() {
+		return this.dadosProfissionais.getCargo();
+	}
+	
+	public BigDecimal getSalario() {
+		return this.dadosProfissionais.getSalario();
 	}
 
 	@Override

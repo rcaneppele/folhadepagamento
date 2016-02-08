@@ -4,11 +4,16 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 import br.com.rcaneppele.folhadepagamento.cargo.Cargo;
+import br.com.rcaneppele.folhadepagamento.cargo.CargoRepository;
 
 @FacesConverter("CargoConverter")
 public class CargoConverter implements Converter {
+	
+	@Inject
+	private CargoRepository repository;
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -16,7 +21,7 @@ public class CargoConverter implements Converter {
 			return null;
 		}
 		
-		return new Cargo(Long.parseLong(value));
+		return repository.buscaPorId(Long.parseLong(value));
 	}
 
 	@Override
