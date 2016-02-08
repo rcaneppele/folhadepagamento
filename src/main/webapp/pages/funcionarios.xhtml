@@ -73,7 +73,7 @@
 								<label for="cargo" class="col-sm-2 control-label">Cargo:</label>
 								<div class="col-sm-4">
 									<h:selectOneMenu id="cargo" styleClass="form-control" required="true" value="#{funcionarioMB.funcionario.dadosProfissionais.cargo}" converter="CargoConverter">
-										<f:selectItems value="#{funcionarioMB.cargos}" var="cargo" itemLabel="#{cargo.nome}" itemValue="#{cargo}" />
+										<f:selectItems value="#{funcionarioMB.cargos}" var="cargo" itemLabel="#{cargo.nome} (R$ #{cargo.faixaSalarial.valorMinimo} - R$ #{cargo.faixaSalarial.valorMaximo})" itemValue="#{cargo}" />
 									</h:selectOneMenu>
 								</div>
 							</div>
