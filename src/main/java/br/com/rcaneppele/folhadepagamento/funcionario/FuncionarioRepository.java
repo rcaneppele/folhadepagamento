@@ -1,5 +1,6 @@
 package br.com.rcaneppele.folhadepagamento.funcionario;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -39,6 +40,13 @@ public class FuncionarioRepository {
 				.setParameter("cpf", cpf)
 				.setParameter("matricula", matricula)
 				.getResultList();
+	}
+	
+	public BigDecimal buscaSalarioAtualDoFuncionario(Funcionario funcionario) {
+		String jpql = "SELECT f.dadosProfissionais.salario FROM " +Funcionario.class.getName() + " f WHERE f = :funcionario";
+		return em.createQuery(jpql, BigDecimal.class)
+				.setParameter("funcionario", funcionario)
+				.getSingleResult();
 	}
 	
 	public void cadastra(Funcionario novo) {

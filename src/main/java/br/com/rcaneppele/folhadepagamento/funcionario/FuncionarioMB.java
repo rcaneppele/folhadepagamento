@@ -1,5 +1,6 @@
 package br.com.rcaneppele.folhadepagamento.funcionario;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -36,6 +37,8 @@ public class FuncionarioMB {
 	
 	@Transactional
 	public void cadastra() {
+		recuperaSalarioDoFuncionario();
+		
 		if (!validadorSalarioFuncionario.isSalarioCompativelComOCargo(funcionario)) {
 			msg.adicionaMensagemErro("Sálario digitado não está de acordo com a faixa salarial do cargo escolhido!");
 			return;
@@ -58,6 +61,14 @@ public class FuncionarioMB {
 		atualizaTabela();
 	}
 	
+	private void recuperaSalarioDoFuncionario() {
+		// Na alteracao o salario vem null, pois o campo na tela eh somente leitura
+		if (funcionario.isSalvo()) {
+			BigDecimal salarioAtual = repository.buscaSalarioAtualDoFuncionario(funcionario);
+			funcionario.getDadosProfissionais().setSalario(salarioAtual);
+		}
+	}
+
 	@Transactional
 	public void remove(Funcionario selecionado) {
 		repository.remove(selecionado);
