@@ -30,16 +30,6 @@ public class DadosProfissionais implements Serializable {
 	@NotNull(message = "{dataAdmissao.obrigatoria}") 
 	private LocalDate dataAdmissao;
 	
-	public DadosProfissionais() {
-	}
-	
-	public DadosProfissionais(String matricula, BigDecimal salario, Cargo cargo, LocalDate dataAdmissao) {
-		this.matricula = matricula;
-		this.salario = salario;
-		this.cargo = cargo;
-		this.dataAdmissao = dataAdmissao;
-	}
-
 	public String getMatricula() {
 		return matricula;
 	}

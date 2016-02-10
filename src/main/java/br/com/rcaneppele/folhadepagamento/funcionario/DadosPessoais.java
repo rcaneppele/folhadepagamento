@@ -27,16 +27,6 @@ public class DadosPessoais implements Serializable {
 	@Size(min = 1, message = "{telefone.obrigatorio}")
 	private String telefone;
 	
-	public DadosPessoais() {
-	}
-
-	public DadosPessoais(String nome, String cpf, String email, String telefone) {
-		this.nome = nome;
-		this.cpf = cpf;
-		this.email = email;
-		this.telefone = telefone;
-	}
-
 	public String getNome() {
 		return nome;
 	}
