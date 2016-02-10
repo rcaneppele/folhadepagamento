@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -35,6 +36,7 @@ public class Funcionario implements Serializable {
 	private DadosProfissionais dadosProfissionais = new DadosProfissionais();
 	
 	@ElementCollection
+	@CollectionTable(name = "Reajuste_Salarial")
 	private List<Reajuste> reajustes = new ArrayList<>();
 	
 	public boolean isSalvo() {
