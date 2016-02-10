@@ -3,7 +3,10 @@ package br.com.rcaneppele.folhadepagamento.funcionario;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +15,7 @@ import javax.persistence.Id;
 import javax.validation.Valid;
 
 import br.com.rcaneppele.folhadepagamento.cargo.Cargo;
+import br.com.rcaneppele.folhadepagamento.funcionario.reajuste.Reajuste;
 
 @Entity
 public class Funcionario implements Serializable {
@@ -30,8 +34,26 @@ public class Funcionario implements Serializable {
 	@Valid
 	private DadosProfissionais dadosProfissionais = new DadosProfissionais();
 	
+	@ElementCollection
+	private List<Reajuste> reajustes = new ArrayList<>();
+	
 	public boolean isSalvo() {
 		return this.id != null;
+	}
+	
+	public Reajuste getUltimoReajuste() {
+		return reajustes.stream().max((d1, d2) -> d1.getData().compareTo(d2.getData())).orElse(null);
+	}
+	
+	public void reajustaSalario(Reajuste reajuste) {
+		this.reajustes.add(reajuste);
+		
+		BigDecimal novoSalario = this.getSalario().add(reajuste.getValor());
+		this.dadosProfissionais.setSalario(novoSalario);
+	}
+
+	public String getNome() {
+		return this.dadosPessoais.getNome();
 	}
 	
 	public Cargo getCargo() {
@@ -87,5 +109,8 @@ public class Funcionario implements Serializable {
 	public DadosProfissionais getDadosProfissionais() {
 		return dadosProfissionais;
 	}
-	
+	public List<Reajuste> getReajustes() {
+		return reajustes;
+	}
+
 }

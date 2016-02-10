@@ -29,6 +29,13 @@ public class FuncionarioRepository {
 		return em.find(Funcionario.class, id);
 	}
 	
+	public Funcionario carregaFuncionarioComReajustes(Long id) {
+		String jpql = "SELECT f FROM " +Funcionario.class.getName() + " f LEFT JOIN FETCH f.reajustes WHERE f.id = :id";
+		return em.createQuery(jpql, Funcionario.class)
+				.setParameter("id", id)
+				.getSingleResult();
+	}
+	
 	public List<Funcionario> buscaTodosOrdenadosPeloNome() {
 		String jpql = "SELECT f FROM " +Funcionario.class.getName() + " f ORDER BY f.dadosPessoais.nome";
 		return em.createQuery(jpql, Funcionario.class).getResultList();

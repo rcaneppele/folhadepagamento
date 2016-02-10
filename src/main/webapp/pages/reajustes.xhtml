@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="/WEB-INF/_template.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+	
+	<ui:define name="titulo">Cadastro de Reajuste Salarial</ui:define>
+	
+	<ui:define name="extraScripts">
+		<script type="text/javascript" src="#{request.contextPath}/resources/jquery/plugins/jquery.price.min.js"></script>
+		<script type="text/javascript">
+			(function($) {
+				"use strict";
+				
+				$(".monetario").priceFormat({
+				    prefix: "R$ ",
+				    centsSeparator: ",",
+				    thousandsSeparator: ".",
+				    clearPrefix: true
+				});
+			})(jQuery);
+		</script>
+	</ui:define>
+	
+	<ui:define name="principal">
+		<f:view transient="true">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title text-center">CADASTRO DE REAJUSTE SALARIAL</h3>
+				</div>
+				
+				<div class="panel-body">
+					<form jsf:id="form-cadastro" jsf:prependId="false" class="form-horizontal" method="post">
+						<h:inputHidden value="#{reajusteMB.idFuncionario}" />
+					
+						<fieldset>
+							<legend>Dados do Funcionário</legend>
+							
+							<div class="form-group">
+								<label for="nome" class="col-sm-2 control-label">Nome:</label>
+								<div class="col-sm-4">
+									<h:outputText styleClass="form-control" id="nome" value="#{reajusteMB.funcionario.nome}" />
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="matricula" class="col-sm-2 control-label">Matricula:</label>
+								<div class="col-sm-4">
+									<h:outputText styleClass="form-control" id="matricula" value="#{reajusteMB.funcionario.matricula}" />
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="admissao" class="col-sm-2 control-label">Data de Admissão:</label>
+								<div class="col-sm-4">
+									<h:outputText styleClass="form-control" id="admissao" value="#{reajusteMB.funcionario.dataAdmissao}" converter="LocalDateConverter" />
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="salario" class="col-sm-2 control-label">Salário atual:</label>
+								<div class="col-sm-4">
+									<h:outputText styleClass="form-control" id="salario" value="#{reajusteMB.funcionario.salario}" converter="CustomBigDecimalConverter" />
+								</div>
+							</div>
+						</fieldset>
+						
+						<fieldset>
+							<legend>Dados do Reajuste</legend>
+							
+							<div class="form-group">
+								<label for="valor" class="col-sm-2 control-label">Valor:</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control monetario" id="valor" required="required" jsf:value="#{reajusteMB.reajuste.valor}" jsf:converter="CustomBigDecimalConverter" />
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="justificativa" class="col-sm-2 control-label">Justificativa:</label>
+								<div class="col-sm-4">
+									<textarea class="form-control" id="justificativa" required="required" jsf:value="#{reajusteMB.reajuste.justificativa}"></textarea>
+								</div>
+							</div>
+						</fieldset>
+						
+						<button type="submit" class="btn btn-primary" jsf:action="#{reajusteMB.cadastra}">
+							<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Gravar
+						</button>
+					</form>
+				</div>
+			</div>
+			
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title text-center">REAJUSTES CONCEDIDOS AO FUNCIONÁRIO</h3>
+				</div>
+				
+				<div class="panel-body">
+					<div class="table-responsive">
+						<form jsf:id="form-listagem" jsf:prependId="false">
+							<h:dataTable styleClass="table table-hover table-striped table-bordered" value="#{reajusteMB.funcionario.reajustes}" var="reajuste">
+								<h:column>
+									<f:facet name="header">DATA</f:facet>
+									<h:outputText value="#{reajuste.data}" converter="LocalDateConverter" />
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">VALOR</f:facet>
+									<h:outputText value="#{reajuste.valor}" converter="CustomBigDecimalConverter" />
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">JUSTIFICATIVA</f:facet>
+									<h:outputText value="#{reajuste.justificativa}" />
+								</h:column>
+							</h:dataTable>
+						</form>
+					</div>
+				</div>
+			</div>
+		</f:view>
+	</ui:define>
+</ui:composition>
