@@ -1,6 +1,7 @@
 package br.com.rcaneppele.folhadepagamento.funcionario;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -54,6 +55,13 @@ public class FuncionarioRepository {
 		return em.createQuery(jpql, BigDecimal.class)
 				.setParameter("funcionario", funcionario)
 				.getSingleResult();
+	}
+	
+	public List<Funcionario> buscaTodosQueForamContratadosAntesDe(LocalDate data) {
+		String jpql = "SELECT f FROM " +Funcionario.class.getName() + " f WHERE f.dadosProfissionais.dataAdmissao <= :data ORDER BY f.dadosPessoais.nome";
+		return em.createQuery(jpql, Funcionario.class)
+				.setParameter("data", data)
+				.getResultList();
 	}
 	
 	public void cadastra(Funcionario novo) {

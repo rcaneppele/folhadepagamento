@@ -15,11 +15,24 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li>
-					<h:outputLink value="#{request.contextPath}/pages/cargos.xhtml">CARGOS</h:outputLink>
+					<a href="#{request.contextPath}/pages/folha-de-pagamento.xhtml">FOLHA DE PAGAMENTO</a>
 				</li>
 				
-				<li>
-					<a href="#{request.contextPath}/pages/funcionarios.xhtml">FUNCIONÁRIOS</a>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+             			CADASTROS <span class="caret"></span>
+             		</a>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<h:outputLink value="#{request.contextPath}/pages/cargos.xhtml">CARGOS</h:outputLink>
+						</li>
+						
+						<li class="divider"></li>
+						
+						<li>
+							<a href="#{request.contextPath}/pages/funcionarios.xhtml">FUNCIONÁRIOS</a>
+						</li>
+					</ul>
 				</li>
 			</ul>
 		</div>

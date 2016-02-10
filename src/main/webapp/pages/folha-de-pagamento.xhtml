@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="/WEB-INF/_template.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+	
+	<ui:define name="titulo">Cálculo da Folha de Pagamento</ui:define>
+	
+	<ui:define name="principal">
+		<f:view transient="true">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title text-center">CALCULAR FOLHA DE PAGAMENTO DO MÊS</h3>
+				</div>
+				
+				<div class="panel-body">
+					<form jsf:id="form-cadastro" jsf:prependId="false" class="form-horizontal" method="post">
+						<div class="form-group">
+							<label for="mes" class="col-sm-2 control-label">Mês:</label>
+							<div class="col-sm-4">
+								<h:selectOneMenu id="mes" styleClass="form-control" required="true" value="#{folhaDePagamentoMB.mesEscolhido}">
+									<f:selectItem itemValue="1" itemLabel="janeiro" />
+									<f:selectItem itemValue="2" itemLabel="fevereiro" />
+									<f:selectItem itemValue="3" itemLabel="março" />
+									<f:selectItem itemValue="4" itemLabel="abril" />
+									<f:selectItem itemValue="5" itemLabel="maio" />
+									<f:selectItem itemValue="6" itemLabel="junho" />
+									<f:selectItem itemValue="7" itemLabel="julho" />
+									<f:selectItem itemValue="8" itemLabel="agoto" />
+									<f:selectItem itemValue="9" itemLabel="setembro" />
+									<f:selectItem itemValue="10" itemLabel="outubro" />
+									<f:selectItem itemValue="11" itemLabel="novembro" />
+									<f:selectItem itemValue="12" itemLabel="dezembro" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="ano" class="col-sm-2 control-label">Ano:</label>
+							<div class="col-sm-4">
+								<h:selectOneMenu id="ano" styleClass="form-control" required="true" value="#{folhaDePagamentoMB.anoEscolhido}">
+									<f:selectItem itemValue="2016" itemLabel="2016" />
+									<f:selectItem itemValue="2015" itemLabel="2015" />
+									<f:selectItem itemValue="2014" itemLabel="2014" />
+									<f:selectItem itemValue="2013" itemLabel="2013" />
+									<f:selectItem itemValue="2012" itemLabel="2012" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						
+						<button type="submit" class="btn btn-primary" jsf:action="#{folhaDePagamentoMB.calculaFolhaDePagamento}">
+							<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Calcular
+						</button>
+					</form>
+				</div>
+			</div>
+			
+			<h:panelGroup rendered="#{folhaDePagamentoMB.folhaDoMes != null}">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title text-center">FOLHA DE PAGAMENTO DO MÊS</h3>
+					</div>
+					
+					<div class="panel-body">
+						<table class="table table-hover">
+							<tbody>
+								<tr class="alert-success">
+									<td>
+										CUSTO COM SALÁRIOS
+									</td>
+									
+									<td>
+										<h:outputText value="#{folhaDePagamentoMB.folhaDoMes.somatorioSalarios}" converter="CustomBigDecimalConverter" />
+									</td>
+								</tr>
+								
+								<tr class="alert-info">
+									<td>
+										CUSTO COM FGTS
+									</td>
+									
+									<td>
+										<h:outputText value="#{folhaDePagamentoMB.folhaDoMes.somatorioFGTS}" converter="CustomBigDecimalConverter" />
+									</td>
+								</tr>
+								
+								<tr class="alert-warning">
+									<td>
+										CUSTO COM INSS
+									</td>
+									
+									<td>
+										<h:outputText value="#{folhaDePagamentoMB.folhaDoMes.somatorioINSS}" converter="CustomBigDecimalConverter" />
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</h:panelGroup>
+		</f:view>
+	</ui:define>
+</ui:composition>
