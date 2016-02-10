@@ -8,20 +8,9 @@
 	<ui:define name="titulo">Cadastro de Funcionários</ui:define>
 	
 	<ui:define name="extraScripts">
-		<script type="text/javascript" src="#{request.contextPath}/resources/jquery/plugins/jquery.price.min.js"></script>
-		<script type="text/javascript" src="#{request.contextPath}/resources/jquery/plugins/jquery.mask.min.js"></script>
-		<script type="text/javascript">
-			(function($) {
-				"use strict";
-				
-				$(".monetario").priceFormat({
-				    prefix: "R$ ",
-				    centsSeparator: ",",
-				    thousandsSeparator: ".",
-				    clearPrefix: true
-				});
-			})(jQuery);
-		</script>
+		<script type="text/javascript" src="#{request.contextPath}/resources/js/jquery/plugins/jquery.price.min.js"></script>
+		<script type="text/javascript" src="#{request.contextPath}/resources/js/jquery/plugins/jquery.mask.min.js"></script>
+		<script type="text/javascript" src="#{request.contextPath}/resources/js/mascara.monetaria.js"></script>
 	</ui:define>
 	
 	<ui:define name="principal">
