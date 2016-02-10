@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Embeddable
 // R$880 => salario minimo 2016
-public class FaixaSalarialVO implements Serializable {
+public class FaixaSalarial implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -20,14 +20,6 @@ public class FaixaSalarialVO implements Serializable {
 	@NotNull(message = "{valorMaximo.obrigatorio}")
 	@DecimalMin(value = "880", message = "{valor.salario.invalido}")
 	private BigDecimal valorMaximo;
-	
-	public FaixaSalarialVO() {
-	}
-
-	public FaixaSalarialVO(BigDecimal valorMinimo, BigDecimal valorMaximo) {
-		this.valorMinimo = valorMinimo;
-		this.valorMaximo = valorMaximo;
-	}
 	
 	@Override
 	public int hashCode() {
@@ -48,7 +40,7 @@ public class FaixaSalarialVO implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FaixaSalarialVO other = (FaixaSalarialVO) obj;
+		FaixaSalarial other = (FaixaSalarial) obj;
 		if (valorMaximo == null) {
 			if (other.valorMaximo != null)
 				return false;

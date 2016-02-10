@@ -27,7 +27,7 @@ public class Cargo implements Serializable {
 	
 	@Embedded
 	@Valid
-	private FaixaSalarialVO faixaSalarial = new FaixaSalarialVO();
+	private FaixaSalarial faixaSalarial = new FaixaSalarial();
 	
 	public Cargo() {
 	}
@@ -85,7 +85,7 @@ public class Cargo implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public FaixaSalarialVO getFaixaSalarial() {
+	public FaixaSalarial getFaixaSalarial() {
 		return faixaSalarial;
 	}
 	
