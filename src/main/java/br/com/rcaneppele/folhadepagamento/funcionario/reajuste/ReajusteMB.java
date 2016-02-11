@@ -1,12 +1,15 @@
 package br.com.rcaneppele.folhadepagamento.funcionario.reajuste;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 
 import br.com.rcaneppele.folhadepagamento.funcionario.Funcionario;
 import br.com.rcaneppele.folhadepagamento.funcionario.FuncionarioRepository;
+import br.com.rcaneppele.folhadepagamento.funcionario.reajuste.validacao.ValidadorCadastroReajuste;
 import br.com.rcaneppele.folhadepagamento.util.jsf.MensagensJSF;
 
 @Named
@@ -19,8 +22,8 @@ public class ReajusteMB {
 	@Inject
 	private MensagensJSF msg;
 	
-	@Inject
-	private ValidadorReajusteSalarial validadorReajusteSalarial;
+	@Inject @Any
+	private Instance<ValidadorCadastroReajuste> validadoresCadastro;
 	
 	private Funcionario funcionario;
 	private Long idFuncionario;
@@ -29,6 +32,7 @@ public class ReajusteMB {
 	public String carregaReajustesDoFuncionario(Long idFuncionario) {
 		this.funcionario = repository.carregaFuncionarioComReajustes(idFuncionario);
 		this.idFuncionario = idFuncionario;
+		
 		return "reajustes";
 	}
 	
@@ -36,7 +40,9 @@ public class ReajusteMB {
 	public void cadastra() {
 		try {
 			this.funcionario = repository.carregaFuncionarioComReajustes(this.idFuncionario);
-			validadorReajusteSalarial.valida(funcionario, reajuste);
+			
+			validadoresCadastro.forEach(v -> v.valida(funcionario, reajuste));
+			
 			funcionario.reajustaSalario(reajuste);
 			repository.atualiza(funcionario);
 			

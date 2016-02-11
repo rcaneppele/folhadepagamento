@@ -1,4 +1,4 @@
-package br.com.rcaneppele.folhadepagamento.funcionario;
+package br.com.rcaneppele.folhadepagamento.funcionario.validacao;
 
 import java.util.List;
 
@@ -6,11 +6,13 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.rcaneppele.folhadepagamento.funcionario.Funcionario;
+import br.com.rcaneppele.folhadepagamento.funcionario.FuncionarioRepository;
 import br.com.rcaneppele.folhadepagamento.util.ValidacaoException;
 
 @Named
 @Dependent
-public class ValidadorFuncionarioExistente {
+public class ValidadorFuncionarioExistente implements ValidadorCadastroFuncionario {
 	
 	private final FuncionarioRepository repository;
 	
@@ -19,7 +21,8 @@ public class ValidadorFuncionarioExistente {
 		this.repository = repository;
 	}
 	
-	public void valida(Funcionario funcionario) {
+	@Override
+	public void valida(Funcionario funcionario) throws ValidacaoException {
 		List<Funcionario> encontrados = repository.buscaPorCPFOuMatricula(funcionario.getDadosPessoais().getCpf(), funcionario.getDadosProfissionais().getMatricula());
 		
 		//Se nao encontrou ninguem cadastrado com o CPF ou Matricula informadas

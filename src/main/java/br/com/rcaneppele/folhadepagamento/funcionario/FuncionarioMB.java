@@ -4,12 +4,15 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 
 import br.com.rcaneppele.folhadepagamento.cargo.Cargo;
 import br.com.rcaneppele.folhadepagamento.cargo.CargoRepository;
+import br.com.rcaneppele.folhadepagamento.funcionario.validacao.ValidadorCadastroFuncionario;
 import br.com.rcaneppele.folhadepagamento.util.ValidacaoException;
 import br.com.rcaneppele.folhadepagamento.util.jsf.MensagensJSF;
 
@@ -26,11 +29,8 @@ public class FuncionarioMB {
 	@Inject
 	private MensagensJSF msg;
 	
-	@Inject
-	private ValidadorFuncionarioExistente validadorFuncionarioExistente;
-	
-	@Inject
-	private ValidadorSalarioFuncionario validadorSalarioFuncionario;
+	@Inject @Any
+	private Instance<ValidadorCadastroFuncionario> validadoresCadastro;
 	
 	private Funcionario funcionario = new Funcionario();
 	private List<Funcionario> todos;
@@ -41,8 +41,7 @@ public class FuncionarioMB {
 		try {
 			recuperaSalarioDoFuncionario();
 		
-			validadorSalarioFuncionario.valida(funcionario);
-			validadorFuncionarioExistente.valida(funcionario);
+			validadoresCadastro.forEach(v -> v.valida(funcionario));
 		
 			if (funcionario.isSalvo()) {
 				repository.atualiza(funcionario);

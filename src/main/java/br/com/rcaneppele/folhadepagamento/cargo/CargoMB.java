@@ -3,10 +3,13 @@ package br.com.rcaneppele.folhadepagamento.cargo;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 
+import br.com.rcaneppele.folhadepagamento.cargo.validacao.ValidadorCadastroCargo;
 import br.com.rcaneppele.folhadepagamento.util.ValidacaoException;
 import br.com.rcaneppele.folhadepagamento.util.jsf.MensagensJSF;
 
@@ -20,8 +23,8 @@ public class CargoMB {
 	@Inject
 	private MensagensJSF msg;
 	
-	@Inject
-	private ValidadorCargoExistente validadorCargoExistente;
+	@Inject @Any
+	private Instance<ValidadorCadastroCargo> validadoresCadastro;
 	
 	private Cargo cargo = new Cargo();
 	private List<Cargo> todos;
@@ -29,7 +32,7 @@ public class CargoMB {
 	@Transactional
 	public void cadastra() {
 		try {
-			validadorCargoExistente.valida(cargo);
+			validadoresCadastro.forEach(v -> v.valida(cargo));
 			
 			if (cargo.isSalvo()) {
 				repository.atualiza(cargo);

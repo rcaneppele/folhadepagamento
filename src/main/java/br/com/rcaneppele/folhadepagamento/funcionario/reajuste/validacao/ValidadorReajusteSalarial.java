@@ -1,4 +1,4 @@
-package br.com.rcaneppele.folhadepagamento.funcionario.reajuste;
+package br.com.rcaneppele.folhadepagamento.funcionario.reajuste.validacao;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -9,15 +9,17 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 import br.com.rcaneppele.folhadepagamento.funcionario.Funcionario;
+import br.com.rcaneppele.folhadepagamento.funcionario.reajuste.Reajuste;
 import br.com.rcaneppele.folhadepagamento.util.ValidacaoException;
 
 @Named
 @Dependent
-public class ValidadorReajusteSalarial {
+public class ValidadorReajusteSalarial implements ValidadorCadastroReajuste {
 	
 	private static final BigDecimal PERCENTUAL_MAXIMO_REAJUSTE = new BigDecimal("40");
 
-	public void valida(Funcionario funcionario, Reajuste reajuste) {
+	@Override
+	public void valida(Funcionario funcionario, Reajuste reajuste) throws ValidacaoException {
 		if (funcionarioAindaEstaEmPeriodoDeExperiencia(funcionario)) {
 			throw new ValidacaoException("Funcionário não pode receber reajuste pois ainda está em período de experiência!");
 		}
