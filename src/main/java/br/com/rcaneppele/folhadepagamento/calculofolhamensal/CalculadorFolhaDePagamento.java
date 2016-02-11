@@ -12,6 +12,9 @@ import br.com.rcaneppele.folhadepagamento.funcionario.Funcionario;
 @Dependent
 public class CalculadorFolhaDePagamento {
 
+	private static final BigDecimal ALIQUOTA_FGTS = new BigDecimal("0.08");
+	private static final BigDecimal ALIQUOTA_INSS = new BigDecimal("0.2");
+
 	public FolhadePagamento calcula(List<Funcionario> inclusos) {
 		BigDecimal somatorioSalarios = calculaSomatorioSalarios(inclusos);
 		BigDecimal somatorioFGTS = calculaSomatorioFGTS(inclusos);
@@ -25,11 +28,11 @@ public class CalculadorFolhaDePagamento {
 	}
 
 	private BigDecimal calculaSomatorioFGTS(List<Funcionario> inclusos) {
-		return inclusos.stream().map(Funcionario::getSalario).reduce(BigDecimal.ZERO, (somatorio, atual) -> somatorio.add(atual.multiply(new BigDecimal("0.08"))));
+		return inclusos.stream().map(Funcionario::getSalario).reduce(BigDecimal.ZERO, (somatorio, atual) -> somatorio.add(atual.multiply(ALIQUOTA_FGTS)));
 	}
 
 	private BigDecimal calculaSomatorioINSS(List<Funcionario> inclusos) {
-		return inclusos.stream().map(Funcionario::getSalario).reduce(BigDecimal.ZERO, (somatorio, atual) -> somatorio.add(atual.multiply(new BigDecimal("0.2"))));
+		return inclusos.stream().map(Funcionario::getSalario).reduce(BigDecimal.ZERO, (somatorio, atual) -> somatorio.add(atual.multiply(ALIQUOTA_INSS)));
 	}
 	
 }
