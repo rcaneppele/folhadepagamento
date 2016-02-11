@@ -23,6 +23,7 @@ Projeto com exemplo de Domain Model
   * Sálario deve estar entre a Faixa Salarial do Cargo escolhido;
 * Cadastro de Reajuste Salarial(data, valor, justificativa)
   * Valor do reajuste não pode exceder o valor de 40% do salário do funcionário;
+  * Valor do salário reajustado do funcionário não pode ultrapassar a faixa salarial do seu cargo;
   * Funcionário somente poderá receber o primeiro reajuste após completar o período de experiência(03 meses);
   * O intervalo entre reajustes deve ser de no mínimo 06 meses;
 * Cálculo da Folha de Pagamento do Mês
