@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 
 import br.com.rcaneppele.folhadepagamento.cargo.Cargo;
 import br.com.rcaneppele.folhadepagamento.cargo.CargoRepository;
+import br.com.rcaneppele.folhadepagamento.util.ValidacaoException;
 import br.com.rcaneppele.folhadepagamento.util.jsf.MensagensJSF;
 
 @Named
@@ -37,28 +38,25 @@ public class FuncionarioMB {
 	
 	@Transactional
 	public void cadastra() {
-		recuperaSalarioDoFuncionario();
+		try {
+			recuperaSalarioDoFuncionario();
 		
-		if (!validadorSalarioFuncionario.isSalarioCompativelComOCargo(funcionario)) {
-			msg.adicionaMensagemErro("Sálario digitado não está de acordo com a faixa salarial do cargo escolhido!");
-			return;
+			validadorSalarioFuncionario.valida(funcionario);
+			validadorFuncionarioExistente.valida(funcionario);
+		
+			if (funcionario.isSalvo()) {
+				repository.atualiza(funcionario);
+				msg.adicionaMensagemSucesso("Funcionário atualizado com sucesso!");
+			} else {
+				repository.cadastra(funcionario);
+				msg.adicionaMensagemSucesso("Funcionário cadastrado com sucesso!");
+			}
+			
+			limpaFormulario();
+			atualizaTabela();
+		} catch (ValidacaoException e) {
+			msg.adicionaMensagemErro(e.getMessage());
 		}
-		
-		if (validadorFuncionarioExistente.isFuncionarioJaCadastrado(funcionario)) {
-			msg.adicionaMensagemErro("Já existe outro Funcionário cadastrado com o CPF/Matrícula informada!");
-			return;
-		}
-		
-		if (funcionario.isSalvo()) {
-			repository.atualiza(funcionario);
-			msg.adicionaMensagemSucesso("Funcionário atualizado com sucesso!");
-		} else {
-			repository.cadastra(funcionario);
-			msg.adicionaMensagemSucesso("Funcionário cadastrado com sucesso!");
-		}
-		
-		limpaFormulario();
-		atualizaTabela();
 	}
 	
 	private void recuperaSalarioDoFuncionario() {

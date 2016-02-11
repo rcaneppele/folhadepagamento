@@ -4,6 +4,8 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.rcaneppele.folhadepagamento.util.ValidacaoException;
+
 @Named
 @Dependent
 public class ValidadorCargoExistente {
@@ -15,14 +17,11 @@ public class ValidadorCargoExistente {
 		this.repository = repository;
 	}
 	
-	public boolean isCargoJaCadastrado(Cargo cargo) {
+	public void valida(Cargo cargo) {
 		Cargo existente = repository.buscaPorNome(cargo.getNome());
 		if (existente != null && !cargo.equals(existente)) {
-			return true;
+			throw new ValidacaoException("Já existe outro Cargo cadastrado com o nome informado!");
 		}
-		
-		return false;
 	}
-
 
 }

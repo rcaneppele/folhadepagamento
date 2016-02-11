@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 
+import br.com.rcaneppele.folhadepagamento.util.ValidacaoException;
 import br.com.rcaneppele.folhadepagamento.util.jsf.MensagensJSF;
 
 @Named
@@ -27,21 +28,22 @@ public class CargoMB {
 	
 	@Transactional
 	public void cadastra() {
-		if (validadorCargoExistente.isCargoJaCadastrado(cargo)) {
-			msg.adicionaMensagemErro("Já existe outro Cargo cadastrado com o nome informado!");
-			return;
+		try {
+			validadorCargoExistente.valida(cargo);
+			
+			if (cargo.isSalvo()) {
+				repository.atualiza(cargo);
+				msg.adicionaMensagemSucesso("Cargo atualizado com sucesso!");
+			} else {
+				repository.cadastra(cargo);
+				msg.adicionaMensagemSucesso("Cargo cadastrado com sucesso!");
+			}
+			
+			limpaFormulario();
+			atualizaTabela();
+		} catch (ValidacaoException e) {
+			msg.adicionaMensagemErro(e.getMessage());
 		}
-		
-		if (cargo.isSalvo()) {
-			repository.atualiza(cargo);
-			msg.adicionaMensagemSucesso("Cargo atualizado com sucesso!");
-		} else {
-			repository.cadastra(cargo);
-			msg.adicionaMensagemSucesso("Cargo cadastrado com sucesso!");
-		}
-		
-		limpaFormulario();
-		atualizaTabela();
 	}
 	
 	@Transactional

@@ -13,10 +13,6 @@ import br.com.rcaneppele.folhadepagamento.util.jsf.MensagensJSF;
 @RequestScoped
 public class ReajusteMB {
 
-	private Funcionario funcionario;
-	private Long idFuncionario;
-	private Reajuste reajuste = new Reajuste();
-	
 	@Inject
 	private FuncionarioRepository repository;
 	
@@ -26,6 +22,10 @@ public class ReajusteMB {
 	@Inject
 	private ValidadorReajusteSalarial validadorReajusteSalarial;
 	
+	private Funcionario funcionario;
+	private Long idFuncionario;
+	private Reajuste reajuste = new Reajuste();
+	
 	public String carregaReajustesDoFuncionario(Long idFuncionario) {
 		this.funcionario = repository.carregaFuncionarioComReajustes(idFuncionario);
 		this.idFuncionario = idFuncionario;
@@ -34,18 +34,17 @@ public class ReajusteMB {
 	
 	@Transactional
 	public void cadastra() {
-		this.funcionario = repository.carregaFuncionarioComReajustes(this.idFuncionario);
-		
-		if (!validadorReajusteSalarial.isFuncionarioPodeReceberReajuste(funcionario, reajuste)) {
-			msg.adicionaMensagemErro("Funcionário não pode receber reajuste por não possuir 3 meses de empresa ou por ainda não ter 6 meses desde o último reajuste ou pelo valor do reajuste ser superior ao limite de 40% do salário!");
-			return;
+		try {
+			this.funcionario = repository.carregaFuncionarioComReajustes(this.idFuncionario);
+			validadorReajusteSalarial.valida(funcionario, reajuste);
+			funcionario.reajustaSalario(reajuste);
+			repository.atualiza(funcionario);
+			
+			msg.adicionaMensagemSucesso("Reajuste cadastrado com sucesso!");
+			limpaFormulario();
+		} catch (Exception e) {
+			msg.adicionaMensagemErro(e.getMessage());
 		}
-		
-		funcionario.reajustaSalario(reajuste);
-		repository.atualiza(funcionario);
-		
-		msg.adicionaMensagemSucesso("Reajuste cadastrado com sucesso!");
-		limpaFormulario();
 	}
 	
 	private void limpaFormulario() {
