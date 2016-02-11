@@ -16,9 +16,9 @@ public class ValidadorPeriodicidadeEntreReajustes implements ValidadorCadastroRe
 	@Override
 	public void valida(Funcionario funcionario, Reajuste reajuste) throws ValidacaoException {
 		Reajuste ultimo = funcionario.getUltimoReajuste();
-		if (ultimo != null && ultimo.getData().until(LocalDate.now()).getMonths() < 6) {
+		if (ultimo != null && ultimo.getData().until(LocalDate.now()).toTotalMonths() < 6) {
 			throw new ValidacaoException("Funcionário não pode receber reajuste por já ter recebido outro há menos de 06 meses!");
 		}
 	}
-
+	
 }
