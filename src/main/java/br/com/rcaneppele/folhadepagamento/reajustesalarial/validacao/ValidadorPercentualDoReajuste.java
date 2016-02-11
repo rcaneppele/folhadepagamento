@@ -12,7 +12,7 @@ import br.com.rcaneppele.folhadepagamento.util.ValidacaoException;
 
 @Named
 @Dependent
-public class ValidadorValorDoReajuste implements ValidadorCadastroReajuste {
+public class ValidadorPercentualDoReajuste implements ValidadorCadastroReajuste {
 	
 	private static final BigDecimal PERCENTUAL_MAXIMO_REAJUSTE = new BigDecimal("40");
 	
