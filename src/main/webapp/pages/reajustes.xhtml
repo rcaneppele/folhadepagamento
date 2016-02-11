@@ -20,40 +20,35 @@
 				</div>
 				
 				<div class="panel-body">
+					<dl class="dl-horizontal">
+						<dt>Funcionário:</dt>
+						<dd>
+							<h:outputText value="#{reajusteMB.funcionario.nome}" />
+						</dd>
+						
+						<dt>Matrícula:</dt>
+						<dd>
+							<h:outputText value="#{reajusteMB.funcionario.matricula}" />
+						</dd>
+						
+						<dt>Data de admissão:</dt>
+						<dd>
+							<h:outputText value="#{reajusteMB.funcionario.dataAdmissao}" converter="LocalDateConverter" />
+						</dd>
+						
+						<dt>Cargo:</dt>
+						<dd>
+							<h:outputText value="#{reajusteMB.funcionario.cargo.nome}" />
+						</dd>
+						
+						<dt>Salário atual:</dt>
+						<dd>
+							<h:outputText value="#{reajusteMB.funcionario.salario}" converter="CustomBigDecimalConverter" />
+						</dd>
+					</dl>
+						
 					<form jsf:id="form-cadastro" jsf:prependId="false" class="form-horizontal" method="post">
 						<h:inputHidden value="#{reajusteMB.idFuncionario}" />
-					
-						<fieldset>
-							<legend>Dados do Funcionário</legend>
-							
-							<div class="form-group">
-								<label for="nome" class="col-sm-2 control-label">Nome:</label>
-								<div class="col-sm-4">
-									<h:outputText styleClass="form-control" id="nome" value="#{reajusteMB.funcionario.nome}" />
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label for="matricula" class="col-sm-2 control-label">Matricula:</label>
-								<div class="col-sm-4">
-									<h:outputText styleClass="form-control" id="matricula" value="#{reajusteMB.funcionario.matricula}" />
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label for="admissao" class="col-sm-2 control-label">Data de Admissão:</label>
-								<div class="col-sm-4">
-									<h:outputText styleClass="form-control" id="admissao" value="#{reajusteMB.funcionario.dataAdmissao}" converter="LocalDateConverter" />
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label for="salario" class="col-sm-2 control-label">Salário atual:</label>
-								<div class="col-sm-4">
-									<h:outputText styleClass="form-control" id="salario" value="#{reajusteMB.funcionario.salario}" converter="CustomBigDecimalConverter" />
-								</div>
-							</div>
-						</fieldset>
 						
 						<fieldset>
 							<legend>Dados do Reajuste</legend>
