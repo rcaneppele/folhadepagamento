@@ -47,6 +47,11 @@ public class Cargo implements Serializable {
 	public BigDecimal getValorSalarioMaximo() {
 		return this.faixaSalarial.getValorMaximo();
 	}
+	
+	@Override
+	public String toString() {
+		return this.nome +faixaSalarial.toString();
+	}
 
 	@Override
 	public int hashCode() {

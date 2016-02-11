@@ -22,6 +22,11 @@ public class FaixaSalarial implements Serializable {
 	private BigDecimal valorMaximo;
 	
 	@Override
+	public String toString() {
+		return " (R$ " +valorMinimo +" - R$ " +valorMaximo +")";
+	}
+	
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
