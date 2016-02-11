@@ -78,7 +78,7 @@
 								<label for="salario" class="col-sm-2 control-label">Salário:</label>
 								<div class="col-sm-4">
 									<input type="text" class="form-control monetario" id="salario" required="required" jsf:value="#{funcionarioMB.funcionario.dadosProfissionais.salario}" jsf:converter="CustomBigDecimalConverter" jsf:rendered="#{empty funcionarioMB.funcionario.id}" />
-									<h:outputText styleClass="form-control" value="#{funcionarioMB.funcionario.dadosProfissionais.salario}" rendered="#{not empty funcionarioMB.funcionario.id}" />
+									<h:outputText style="display:block;padding:6px 0;" value="#{funcionarioMB.funcionario.dadosProfissionais.salario}" rendered="#{not empty funcionarioMB.funcionario.id}" />
 								</div>
 							</div>
 							
