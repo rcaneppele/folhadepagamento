@@ -1,4 +1,4 @@
-package br.com.rcaneppele.folhadepagamento.funcionario.reajuste;
+package br.com.rcaneppele.folhadepagamento.reajustesalarial;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

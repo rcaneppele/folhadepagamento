@@ -16,7 +16,7 @@ import javax.persistence.Id;
 import javax.validation.Valid;
 
 import br.com.rcaneppele.folhadepagamento.cargo.Cargo;
-import br.com.rcaneppele.folhadepagamento.funcionario.reajuste.Reajuste;
+import br.com.rcaneppele.folhadepagamento.reajustesalarial.Reajuste;
 
 @Entity
 public class Funcionario implements Serializable {

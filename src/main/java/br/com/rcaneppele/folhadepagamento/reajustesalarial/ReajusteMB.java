@@ -1,4 +1,4 @@
-package br.com.rcaneppele.folhadepagamento.funcionario.reajuste;
+package br.com.rcaneppele.folhadepagamento.reajustesalarial;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Any;
@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 
 import br.com.rcaneppele.folhadepagamento.funcionario.Funcionario;
 import br.com.rcaneppele.folhadepagamento.funcionario.FuncionarioRepository;
-import br.com.rcaneppele.folhadepagamento.funcionario.reajuste.validacao.ValidadorCadastroReajuste;
+import br.com.rcaneppele.folhadepagamento.reajustesalarial.validacao.ValidadorCadastroReajuste;
 import br.com.rcaneppele.folhadepagamento.util.jsf.MensagensJSF;
 
 @Named
