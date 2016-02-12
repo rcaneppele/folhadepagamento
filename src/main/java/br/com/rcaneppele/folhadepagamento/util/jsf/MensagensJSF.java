@@ -29,6 +29,9 @@ public class MensagensJSF {
 		
 		FacesMessage jsfMessage = new FacesMessage(tipo, mensagem, null);
 		context.addMessage(null, jsfMessage);
+		
+		//Para nao perder as mensagens em caso de REDIRECT
+		context.getExternalContext().getFlash().setKeepMessages(true);
 	}
 
 	private ResourceBundle getResourceBundle() {
