@@ -10,7 +10,7 @@ import br.com.rcaneppele.folhadepagamento.util.ValidacaoException;
 
 @Named
 @Dependent
-public class ValidadorSalarioFuncionario implements ValidadorCadastroFuncionario {
+public class ValidadorSalarioCompativelComCargo implements ValidadorCadastroFuncionario {
 
 	@Override
 	public void valida(Funcionario funcionario) throws ValidacaoException {
