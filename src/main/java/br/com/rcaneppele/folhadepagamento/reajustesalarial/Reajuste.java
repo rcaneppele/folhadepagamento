@@ -25,6 +25,9 @@ public class Reajuste implements Serializable {
 	public LocalDate getData() {
 		return data;
 	}
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
 	public BigDecimal getValor() {
 		return valor;
 	}
