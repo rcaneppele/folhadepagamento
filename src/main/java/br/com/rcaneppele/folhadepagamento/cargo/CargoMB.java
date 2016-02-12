@@ -17,6 +17,8 @@ import br.com.rcaneppele.folhadepagamento.util.jsf.MensagensJSF;
 @RequestScoped
 public class CargoMB {
 
+	private static final String REDIRECT_PAGINA_CARGOS = "cargos?faces-redirect=true";
+
 	@Inject
 	private CargoRepository repository;
 	
@@ -30,7 +32,7 @@ public class CargoMB {
 	private List<Cargo> todos;
 	
 	@Transactional
-	public void cadastra() {
+	public String cadastra() {
 		try {
 			validadoresCadastro.forEach(v -> v.valida(cargo));
 			
@@ -41,32 +43,25 @@ public class CargoMB {
 				repository.cadastra(cargo);
 				msg.adicionaSucesso("cargo.cadastro.sucesso");
 			}
-			
-			limpaFormulario();
-			atualizaTabela();
+
+			return REDIRECT_PAGINA_CARGOS;
 		} catch (ValidacaoException e) {
 			msg.adicionaErro(e.getMessage());
+			return "";
 		}
 	}
 	
 	@Transactional
-	public void remove(Cargo selecionado) {
+	public String remove(Cargo selecionado) {
 		repository.remove(selecionado);
 		msg.adicionaSucesso("cargo.remocao.sucesso");
-		atualizaTabela();
+		
+		return REDIRECT_PAGINA_CARGOS;
 	}
 	
-	private void limpaFormulario() {
-		this.cargo = new Cargo();
-	}
-	
-	private void atualizaTabela() {
-		this.todos = repository.buscaTodosOrdenadosPeloNome();
-	}
-
 	public List<Cargo> getTodos() {
-		if (this.todos == null) {
-			atualizaTabela();
+		if (todos == null) {
+			todos = repository.buscaTodosOrdenadosPeloNome();
 		}
 		return todos;
 	}

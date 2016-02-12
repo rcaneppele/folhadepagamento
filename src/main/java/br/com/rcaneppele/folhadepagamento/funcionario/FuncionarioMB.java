@@ -19,6 +19,8 @@ import br.com.rcaneppele.folhadepagamento.util.jsf.MensagensJSF;
 @Named
 @RequestScoped
 public class FuncionarioMB {
+	
+	private static final String REDIRECT_PAGINA_FUNCIONARIOS = "funcionarios?faces-redirect=true";
 
 	@Inject
 	private FuncionarioRepository repository;
@@ -37,7 +39,7 @@ public class FuncionarioMB {
 	private List<Cargo> cargos;
 	
 	@Transactional
-	public void cadastra() {
+	public String cadastra() {
 		try {
 			recuperaSalarioDoFuncionario();
 		
@@ -51,10 +53,10 @@ public class FuncionarioMB {
 				msg.adicionaSucesso("funcionario.cadastro.sucesso");
 			}
 			
-			limpaFormulario();
-			atualizaTabela();
+			return REDIRECT_PAGINA_FUNCIONARIOS;
 		} catch (ValidacaoException e) {
 			msg.adicionaErro(e.getMessage());
+			return "";
 		}
 	}
 	
@@ -67,29 +69,23 @@ public class FuncionarioMB {
 	}
 
 	@Transactional
-	public void remove(Funcionario selecionado) {
+	public String remove(Funcionario selecionado) {
 		repository.remove(selecionado);
 		msg.adicionaSucesso("funcionario.remocao.sucesso");
-		atualizaTabela();
+		
+		return REDIRECT_PAGINA_FUNCIONARIOS;
 	}
 	
-	private void limpaFormulario() {
-		this.funcionario = new Funcionario();
-	}
-	
-	private void atualizaTabela() {
-		this.todos = repository.buscaTodosOrdenadosPeloNome();
-	}
-
+	//Usado para popular a combo-box de cargos no formulario
 	public List<Cargo> getCargos() {
-		if (this.cargos == null) {
-			this.cargos = cargoRepository.buscaTodosOrdenadosPeloNome();
+		if (cargos == null) {
+			cargos = cargoRepository.buscaTodosOrdenadosPeloNome();
 		}
-		return this.cargos;
+		return cargos;
 	}
 	public List<Funcionario> getTodos() {
-		if (this.todos == null) {
-			atualizaTabela();
+		if (todos == null) {
+			todos = repository.buscaTodosOrdenadosPeloNome();
 		}
 		return todos;
 	}
