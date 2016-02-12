@@ -1,5 +1,7 @@
 package br.com.rcaneppele.folhadepagamento.util.jsf;
 
+import java.util.ResourceBundle;
+
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
@@ -13,18 +15,24 @@ public class MensagensJSF {
 	
 	@Inject
 	private FacesContext context;
-
-	public void adicionaMensagemSucesso(String mensagem) {
-		adicionaMensagem(mensagem, FacesMessage.SEVERITY_INFO);
+	
+	public void adicionaSucesso(String key) {
+		adicionaMensagem(key, FacesMessage.SEVERITY_INFO);
 	}
 	
-	public void adicionaMensagemErro(String mensagem) {
-		adicionaMensagem(mensagem, FacesMessage.SEVERITY_ERROR);
+	public void adicionaErro(String key) {
+		adicionaMensagem(key, FacesMessage.SEVERITY_ERROR);
 	}
 	
-	private void adicionaMensagem(String mensagem, Severity tipo) {
+	private void adicionaMensagem(String key, Severity tipo) {
+		String mensagem = getResourceBundle().getString(key);
+		
 		FacesMessage jsfMessage = new FacesMessage(tipo, mensagem, null);
 		context.addMessage(null, jsfMessage);
+	}
+
+	private ResourceBundle getResourceBundle() {
+		return context.getApplication().getResourceBundle(context, "bundle");
 	}
 	
 }

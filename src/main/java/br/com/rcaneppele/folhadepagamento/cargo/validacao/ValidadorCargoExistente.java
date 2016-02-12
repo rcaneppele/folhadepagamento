@@ -23,7 +23,7 @@ public class ValidadorCargoExistente implements ValidadorCadastroCargo {
 	public void valida(Cargo cargo) throws ValidacaoException {
 		Cargo existente = repository.buscaPorNome(cargo.getNome());
 		if (existente != null && !cargo.equals(existente)) {
-			throw new ValidacaoException("Já existe outro Cargo cadastrado com o nome informado!");
+			throw new ValidacaoException("cargo.validacao.erro.existente");
 		}
 	}
 

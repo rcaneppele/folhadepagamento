@@ -18,7 +18,7 @@ public class ValidadorValoresDaFaixaSalarial implements ValidadorCadastroCargo {
 		BigDecimal valorMaximo = cargo.getFaixaSalarial().getValorMaximo();
 		
 		if (valorMinimo.compareTo(valorMaximo) > 0) {
-			throw new ValidacaoException("Valor Máximo deve ser maior ou igual ao Valor Mínimo!");
+			throw new ValidacaoException("cargo.validacao.erro.valoresDaFaixaSalarial");
 		}
 	}
 

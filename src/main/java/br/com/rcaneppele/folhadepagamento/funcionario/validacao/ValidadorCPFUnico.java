@@ -24,7 +24,7 @@ public class ValidadorCPFUnico implements ValidadorCadastroFuncionario {
 		Funcionario encontrado = repository.buscaPorCPF(funcionario.getDadosPessoais().getCpf());
 
 		if (encontrado != null && !encontrado.equals(funcionario)) {
-			throw new ValidacaoException("Já existe outro Funcionário cadastrado com o CPF informado!");
+			throw new ValidacaoException("funcionario.validacao.erro.cpfExistente");
 		}
 	}
 

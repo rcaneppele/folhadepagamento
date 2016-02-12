@@ -19,7 +19,7 @@ public class ValidadorSalarioCompativelComCargo implements ValidadorCadastroFunc
 		BigDecimal salarioDoFuncionario = funcionario.getSalario();
 		
 		if (salarioDoFuncionario.compareTo(salarioMinimoDoCargo) < 0 || salarioDoFuncionario.compareTo(salarioMaximoDoCargo) > 0) {
-			throw new ValidacaoException("Sálario do funcionário não está de acordo com a faixa salarial do cargo escolhido!");
+			throw new ValidacaoException("funcionario.validacao.erro.salarioCompativelComCargo");
 		}
 	}
 

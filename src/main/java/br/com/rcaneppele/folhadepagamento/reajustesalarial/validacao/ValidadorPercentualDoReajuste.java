@@ -20,7 +20,7 @@ public class ValidadorPercentualDoReajuste implements ValidadorCadastroReajuste 
 		BigDecimal quarentaPorCentoDoSalario = funcionario.getSalario().multiply(PERCENTUAL_MAXIMO_REAJUSTE);
 
 		if (reajuste.getValor().compareTo(quarentaPorCentoDoSalario) > 0) {
-			throw new ValidacaoException("Valor do reajuste não pode ser superior a 40% do salário do funcionário!");
+			throw new ValidacaoException("reajuste.validacao.erro.percentual");
 		}
 	}
 

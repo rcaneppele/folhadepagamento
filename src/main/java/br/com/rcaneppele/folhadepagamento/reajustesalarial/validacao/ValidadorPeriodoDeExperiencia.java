@@ -18,7 +18,7 @@ public class ValidadorPeriodoDeExperiencia implements ValidadorCadastroReajuste 
 	public void valida(Funcionario funcionario, Reajuste reajuste) throws ValidacaoException {
 		Period periodoNaEmpresa = funcionario.getDataAdmissao().until(LocalDate.now());
 		if (periodoNaEmpresa.toTotalMonths() < 3) {
-			throw new ValidacaoException("Funcionário não pode receber reajuste pois ainda está em período de experiência!");
+			throw new ValidacaoException("reajuste.validacao.erro.periodoExperiencia");
 		}
 	}
 

@@ -45,16 +45,16 @@ public class FuncionarioMB {
 		
 			if (funcionario.isSalvo()) {
 				repository.atualiza(funcionario);
-				msg.adicionaMensagemSucesso("Funcionário atualizado com sucesso!");
+				msg.adicionaSucesso("funcionario.atualizacao.sucesso");
 			} else {
 				repository.cadastra(funcionario);
-				msg.adicionaMensagemSucesso("Funcionário cadastrado com sucesso!");
+				msg.adicionaSucesso("funcionario.cadastro.sucesso");
 			}
 			
 			limpaFormulario();
 			atualizaTabela();
 		} catch (ValidacaoException e) {
-			msg.adicionaMensagemErro(e.getMessage());
+			msg.adicionaErro(e.getMessage());
 		}
 	}
 	
@@ -69,7 +69,7 @@ public class FuncionarioMB {
 	@Transactional
 	public void remove(Funcionario selecionado) {
 		repository.remove(selecionado);
-		msg.adicionaMensagemSucesso("Funcionário removido com sucesso!");
+		msg.adicionaSucesso("funcionario.remocao.sucesso");
 		atualizaTabela();
 	}
 	

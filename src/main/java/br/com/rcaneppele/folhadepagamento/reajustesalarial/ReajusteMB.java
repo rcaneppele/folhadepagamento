@@ -46,10 +46,10 @@ public class ReajusteMB {
 			funcionario.reajustaSalario(reajuste);
 			repository.atualiza(funcionario);
 			
-			msg.adicionaMensagemSucesso("Reajuste cadastrado com sucesso!");
+			msg.adicionaSucesso("reajuste.cadastro.sucesso");
 			limpaFormulario();
 		} catch (Exception e) {
-			msg.adicionaMensagemErro(e.getMessage());
+			msg.adicionaErro(e.getMessage());
 		}
 	}
 	

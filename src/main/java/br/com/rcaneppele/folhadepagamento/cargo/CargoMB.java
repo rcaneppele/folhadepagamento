@@ -36,23 +36,23 @@ public class CargoMB {
 			
 			if (cargo.isSalvo()) {
 				repository.atualiza(cargo);
-				msg.adicionaMensagemSucesso("Cargo atualizado com sucesso!");
+				msg.adicionaSucesso("cargo.atualizacao.sucesso");
 			} else {
 				repository.cadastra(cargo);
-				msg.adicionaMensagemSucesso("Cargo cadastrado com sucesso!");
+				msg.adicionaSucesso("cargo.cadastro.sucesso");
 			}
 			
 			limpaFormulario();
 			atualizaTabela();
 		} catch (ValidacaoException e) {
-			msg.adicionaMensagemErro(e.getMessage());
+			msg.adicionaErro(e.getMessage());
 		}
 	}
 	
 	@Transactional
 	public void remove(Cargo selecionado) {
 		repository.remove(selecionado);
-		msg.adicionaMensagemSucesso("Cargo removido com sucesso!");
+		msg.adicionaSucesso("cargo.remocao.sucesso");
 		atualizaTabela();
 	}
 	

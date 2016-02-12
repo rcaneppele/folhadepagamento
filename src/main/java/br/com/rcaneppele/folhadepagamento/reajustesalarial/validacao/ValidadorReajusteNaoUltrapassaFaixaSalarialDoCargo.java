@@ -19,7 +19,7 @@ public class ValidadorReajusteNaoUltrapassaFaixaSalarialDoCargo implements Valid
 		BigDecimal salarioReajustado = funcionario.getSalario().add(reajuste.getValor());
 		
 		if (salarioReajustado.compareTo(salarioMaximoDoCargo) > 0) {
-			throw new ValidacaoException("Reajuste não pode ser concedido pois o novo valor do salário ultrapassaria a faixa salarial do cargo!");
+			throw new ValidacaoException("reajuste.validacao.erro.valorUltrapassaFaixaSalarial");
 		}
 	}
 

@@ -24,7 +24,7 @@ public class ValidadorMatriculaUnica implements ValidadorCadastroFuncionario {
 		Funcionario encontrado = repository.buscaPorMatricula(funcionario.getDadosProfissionais().getMatricula());
 
 		if (encontrado != null && !encontrado.equals(funcionario)) {
-			throw new ValidacaoException("Já existe outro Funcionário cadastrado com a Matrícula informada!");
+			throw new ValidacaoException("funcionario.validacao.erro.matriculaExistente");
 		}
 	}
 
