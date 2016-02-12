@@ -1,11 +1,13 @@
 # Folha de Pagamento
-Projeto com exemplo de Domain Model
+Projeto com exemplo de arquitetura Domain Model
 
 ## Tecnologias
 * Java 8
 * Maven
 * Bootstrap
 * MySQL 5
+* JUnit 4
+* Mockito
 * JAVA EE 7
   * JPA 2.1/Hibernate
   * JTA 1.2
