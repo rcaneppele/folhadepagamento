@@ -138,9 +138,9 @@
 										<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Alterar
 									</button>
 									
-									<button style="margin-right: 5%;" class="btn btn-info" jsf:action="#{reajusteMB.carregaReajustesDoFuncionario(funcionario.id)}">
+									<a style="margin-right: 5%;" class="btn btn-info" href="#{request.contextPath}/pages/reajustes.xhtml?funcionario.id=#{funcionario.id}">
 										<span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Reajustes
-									</button>
+									</a>
 									
 									<button class="btn btn-danger" jsf:action="#{funcionarioMB.remove(funcionario)}">
 										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Remover

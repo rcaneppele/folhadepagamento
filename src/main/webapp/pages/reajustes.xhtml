@@ -14,6 +14,11 @@
 	
 	<ui:define name="principal">
 		<f:view transient="true">
+			<f:metadata>
+				<f:viewParam name="funcionario.id" value="#{reajusteMB.idFuncionario}" />
+				<f:viewAction action="#{reajusteMB.carregaReajustesDoFuncionario}" />
+			</f:metadata>
+		
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title text-center">CADASTRO DE REAJUSTE SALARIAL</h3>

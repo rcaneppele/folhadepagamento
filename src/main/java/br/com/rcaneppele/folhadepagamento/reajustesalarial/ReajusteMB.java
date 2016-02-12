@@ -29,15 +29,19 @@ public class ReajusteMB {
 	private Long idFuncionario;
 	private Reajuste reajuste = new Reajuste();
 	
-	public String carregaReajustesDoFuncionario(Long idFuncionario) {
-		this.funcionario = repository.carregaFuncionarioComReajustes(idFuncionario);
-		this.idFuncionario = idFuncionario;
+	//Chamado ao entrar na tela de reajustes
+	public String carregaReajustesDoFuncionario() {
+		//Se entrar direto na pagina de reajustes sem passar o id do funcionario, volta pra pagina de funcionarios
+		if (this.idFuncionario == null) {
+			return "funcionarios";
+		} 
 		
-		return "reajustes";
+		this.funcionario = repository.carregaFuncionarioComReajustes(idFuncionario);
+		return "";
 	}
 	
 	@Transactional
-	public void cadastra() {
+	public String cadastra() {
 		try {
 			this.funcionario = repository.carregaFuncionarioComReajustes(this.idFuncionario);
 			
@@ -47,14 +51,11 @@ public class ReajusteMB {
 			repository.atualiza(funcionario);
 			
 			msg.adicionaSucesso("reajuste.cadastro.sucesso");
-			limpaFormulario();
+			return "reajustes?faces-redirect=true&funcionario.id=" +idFuncionario;
 		} catch (Exception e) {
 			msg.adicionaErro(e.getMessage());
+			return "";
 		}
-	}
-	
-	private void limpaFormulario() {
-		this.reajuste = new Reajuste();
 	}
 	
 	public Funcionario getFuncionario() {
