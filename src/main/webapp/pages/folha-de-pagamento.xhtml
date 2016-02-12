@@ -59,7 +59,7 @@
 			<h:panelGroup rendered="#{folhaDePagamentoMB.folhaDoMes != null}">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title text-center">FOLHA DE PAGAMENTO DO MÊS</h3>
+						<h3 class="panel-title text-center">RESUMO DA FOLHA DE PAGAMENTO DO MÊS</h3>
 					</div>
 					
 					<div class="panel-body">
@@ -95,6 +95,14 @@
 									</td>
 								</tr>
 							</tbody>
+							
+							<tfoot>
+								<tr>
+									<td class="text-center text-danger" colspan="2">
+										CUSTO TOTAL: <h:outputText value="#{folhaDePagamentoMB.folhaDoMes.custoTotal}" converter="CustomBigDecimalConverter" />
+									</td>
+								</tr>
+							</tfoot>
 						</table>
 					</div>
 				</div>
